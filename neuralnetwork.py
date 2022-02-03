@@ -24,3 +24,12 @@ class NeuralNetwork:
         for w, b in zip(self.weights, self.biases):
             input = self.activation(np.matmul(w,input) + b)         # for each layer multiply weights of that layer and input to that layer. Add bias. Ax + b. 
         return input
+
+    def statistics(self, images, labels):
+        number_correct = 0
+        number_images = len(images)
+        for i in range(len(images)):
+            number_correct += np.argmax(self.predict(images[i])) == np.argmax(labels[i])
+        print("Total:", number_images)
+        print("Correct:", number_correct)
+        print((number_correct/number_images)*100, "%")
